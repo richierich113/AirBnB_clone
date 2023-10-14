@@ -24,12 +24,12 @@ class FileStorage():
     __file_path = os.path.join(current_directory, "file.json")
     __objects = dict()
 
-    all(self):
+    def all(self):
         """returns the dictionary __objects
         """
         return self.__objects
 
-    new(self, obj):
+    def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id
         """
         if not hasattr(obj, 'to_dict'):
@@ -39,7 +39,7 @@ class FileStorage():
         key = f"{obj_dict['__class__']}.{obj_dict['id']}"
         self.__objects[key] = obj
 
-    save(self):
+    def save(self):
         """serializes __objects to the JSON file (path: __file_path)
         """
         with open(self.__file_path, "w", encoding="utf-8") as myfile:
@@ -60,7 +60,7 @@ class FileStorage():
 
         return my_classes
 
-    reload(self):
+    def reload(self):
         """deserializes the JSON file to __objects only if the JSON file
         exists ; otherwise, does nothing.
         If the file doesn’t exist, no exception is raised
