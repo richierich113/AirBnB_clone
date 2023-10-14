@@ -40,26 +40,27 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """returns a dictionary containing all keys/values of __dict__ of the instance
+        """returns a dictionary containing all keys/values
+        of __dict__ of the instance
         """
         custom_dict = self.__dict__.copy()
         custom_dict['__class__'] = self.__class__.__name__
         custom_dict['created_at'] = self.created_at.isoformat()
         custom_dict['updated_at'] = self.updated_at.isoformat()
         return custom_dict
-    
 
     def set_kwargs_as_attr(self, **kwargs):
         """This checks the passed keyword arguments from a dictionary
-        if it has keys named "created_at" and  "updated_at" to convert their time values
-        else it sets them passed keyword arguments as instance attributes as with their values
+        if it has keys named "created_at" and  "updated_at" to
+        convert their time values
+        else it sets them passed keyword arguments as instance
+        attributes as with their values
         in the BaseModel class
         """
         for (key, value) in kwargs.items():
             keys = ["created_at", "updated_at"]
             if key in keys[:]:
-                self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                self.__dict__[key] = datetime\
+                    .strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
             else:
                 self.__dict__[key] = value
-            
-                
