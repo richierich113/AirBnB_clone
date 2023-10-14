@@ -47,18 +47,19 @@ class FileStorage():
             json.dump(dt, myfile)
 
 
-    def classes(self):
-        """returns a dictionary of  class name
-        and their respective classses
+    def proj_classes(self):
+        """returns a dictionary of class names
+        and their respective classes as values
         """
-        classes = {"BaseModel": BaseModel,
+        my_classes = {"BaseModel": BaseModel,
                    "User": User,
-                   "State": State,
                    "City": City,
                    "Amenity": Amenity,
-                   "Place": Place,
-                   "Review": Review}
-        return classes
+                   "State": State,
+                   "Review": Review,
+                   "Place": Place}
+
+        return my_classes
 
     reload(self):
         """deserializes the JSON file to __objects only if the JSON file
@@ -72,7 +73,7 @@ class FileStorage():
             try:
                 obj_dict = json.load(myFile)
                 self.__objects = {
-                    key: self.classes()[v['__class__']](**v)
+                    key: self.proj_classes()[v['__class__']](**v)
                     for key, v in obj_dict.items()
                 }
             except json.JSONDecodeError:
