@@ -7,6 +7,13 @@ to instances
 
 import os
 import json
+from models.base_model import BaseModel
+from models.place import Place
+from models.review import Review
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
 
 
 class FileStorage():
@@ -39,6 +46,20 @@ class FileStorage():
             dt = {key: v.to_dict() for key, v in self.__objects.items()}
             json.dump(dt, myfile)
 
+
+    def classes(self):
+        """returns a dictionary of  class name
+        and their respective classses
+        """
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
+
     reload(self):
         """deserializes the JSON file to __objects only if the JSON file
         exists ; otherwise, does nothing.
@@ -56,5 +77,3 @@ class FileStorage():
                 }
             except json.JSONDecodeError:
                 pass
-
-    
