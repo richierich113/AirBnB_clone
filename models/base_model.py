@@ -17,6 +17,9 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """The constructor method for the BaseModel class
         which initializes instance attributes passed to the class
+        Args:
+            args: list of arguments passed
+            kwargs: dictionary of key-values arguments passed
         """
         if len(kwargs) >= 1 and kwargs is not None:
             self.set_kwargs_as_attr(**kwargs)
@@ -29,6 +32,9 @@ class BaseModel:
     def __str__(self):
         """Returns string in the format
         [<class name>] (<self.id>) <self.__dict__>
+        Returns:
+            string: string representation of
+            [self.__class__.__name__] (self.id) self.__dict__
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
@@ -56,6 +62,8 @@ class BaseModel:
         else it sets them passed keyword arguments as instance
         attributes as with their values
         in the BaseModel class
+        Args:
+            kwargs: dictionary of key-values arguments passed
         """
         for (key, value) in kwargs.items():
             keys = ["created_at", "updated_at"]
