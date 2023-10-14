@@ -46,18 +46,17 @@ class FileStorage():
             dt = {key: v.to_dict() for key, v in self.__objects.items()}
             json.dump(dt, myfile)
 
-
     def proj_classes(self):
         """returns a dictionary of class names
         and their respective classes as values
         """
         my_classes = {"BaseModel": BaseModel,
-                   "User": User,
-                   "City": City,
-                   "Amenity": Amenity,
-                   "State": State,
-                   "Review": Review,
-                   "Place": Place}
+                      "User": User,
+                      "City": City,
+                      "Amenity": Amenity,
+                      "State": State,
+                      "Review": Review,
+                      "Place": Place}
 
         return my_classes
 
