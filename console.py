@@ -32,32 +32,15 @@ class HBNBCommand(cmd.Cmd):
         """
         if line is None or line == "":
             print("Class name is missing")
-
-        args = line.split()
-        class_name = args[0]
-        if class_name not in storage.proj_classes():
-            print("** class name missing **")
-        
-
-def do_create(self, line):
-    """
-    """
-    args = line.split()
-    if not args:
-        print("Class name is missing")
-        return
-
-    class_name = args[0]
-
-    if class_name not in class_mapping:
-        print(f"Class '{class_name}' not found")
-        return
-
-    obj_class = class_mapping[class_name]
-    new_object = obj_class()
-    new_object.save()
-    print(new_object.id)
-
+	    else:
+            args = line.split()
+            class_name = args[0]
+            if class_name not in storage.proj_classes():
+                print("** class doesn't exist **")
+            else:
+                new_intance = storage.classes()[class_name]()
+                new_intance.save()
+                print(new_intance.id)
 
 def do_create(self, line):
         """Creates an instance.
