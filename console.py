@@ -42,18 +42,6 @@ class HBNBCommand(cmd.Cmd):
                 new_intance.save()
                 print(new_intance.id)
 
-def do_create(self, line):
-        """Creates an instance.
-        """
-        if line == "" or line is None:
-            print("** class name missing **")
-        elif line not in storage.classes():
-            print("** class doesn't exist **")
-        else:
-            b = storage.classes()[line]()
-            b.save()
-            print(b.id)
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
