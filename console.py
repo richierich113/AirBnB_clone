@@ -4,6 +4,10 @@
 
 
 import cmd
+import json
+from models.base_model import BaseModel
+from models import storage
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -94,6 +98,22 @@ class HBNBCommand(cmd.Cmd):
 
          del storage.all()[key]
          storage.save()
+
+    def do_all(self, line):
+        """Prints the string representation of instances."""
+        args = line.split()
+
+        if args:
+            class_name = args[0]
+            if class_name not in storage.classes():
+                print("** class doesn't exist **")
+                return
+            instances = [str(obj) for key, obj in storage.all().values()
+		     if isinstance(obj, storage.classes()[class_name])]
+        else:
+            instances = [str(obj) for obj in storage.all().values()]
+
+        print(instances)
 
 
 if __name__ == '__main__':
