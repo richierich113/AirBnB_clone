@@ -42,6 +42,59 @@ class HBNBCommand(cmd.Cmd):
                 new_intance.save()
                 print(new_intance.id)
 
+    def do_show(self, line):
+        """Prints the string representation of an instance
+	    based on the class name and id
+        """
+        if not line:
+            print("** class name missing **")
+            return
+
+        args = line.split()
+        if len(args) < 2:
+            print("** instance id missing **")
+           return
+
+        class_name = args[0]
+        instance_id = args[1]
+        if class_name not in storage.proj_classes():
+            print("** class doesn't exist **")
+            return
+
+        key = f"{class_name}.{instance_id}"
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+        instance = storage.all()[key]
+        print(instance)
+
+    def do_destroy(self, line):
+        """Prints the string representation of an instance
+	    based on the class name and id
+        """
+        if not line:
+            print("** class name missing **")
+            return
+
+        args = line.split()
+        if len(args) < 2:
+            print("** instance id missing **")
+           return
+
+        class_name = args[0]
+        instance_id = args[1]
+        if class_name not in storage.proj_classes():
+            print("** class doesn't exist **")
+            return
+
+        key = f"{class_name}.{instance_id}"
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+
+         del storage.all()[key]
+         storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
