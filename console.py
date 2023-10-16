@@ -43,9 +43,9 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in storage.proj_classes():
                 print("** class doesn't exist **")
             else:
-                new_intance = storage.classes()[class_name]()
-                new_intance.save()
-                print(new_intance.id)
+                new_instance = storage.proj_classes()[class_name]()
+                new_instance.save()
+                print(new_instance.id)
 
     def do_show(self, line):
         """Prints the string representation of an instance
