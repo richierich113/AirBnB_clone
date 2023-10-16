@@ -17,12 +17,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, argum):
         """Quit command to exit the program
-	"""
+        """
         return True
 
     def do_EOF(self, argum):
         """Thi exits the command interpreter when user
-        presses Ctrl+D"""
+        presses Ctrl+D
+        """
         print()
         return True
 
@@ -32,11 +33,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it
-	    (to the JSON file) and prints the id
+        (to the JSON file) and prints the id
         """
         if line is None or line == "":
             print("Class name is missing")
-	else:
+        else:
             args = line.split()
             class_name = args[0]
             if class_name not in storage.proj_classes():
@@ -48,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """Prints the string representation of an instance
-	    based on the class name and id
+        based on the class name and id
         """
         if not line:
             print("** class name missing **")
@@ -57,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         if len(args) < 2:
             print("** instance id missing **")
-           return
+            return
 
         class_name = args[0]
         instance_id = args[1]
