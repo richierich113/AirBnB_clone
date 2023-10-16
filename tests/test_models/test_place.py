@@ -34,5 +34,6 @@ class TestPlace(unittest.TestCase):
             self.assertTrue(hasattr(self.place, attr_name))
             self.assertIsInstance(getattr(self.place, attr_name), attr_type)
 
+
 if __name__ == "__main__":
     unittest.main()
