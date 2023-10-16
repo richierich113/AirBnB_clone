@@ -19,7 +19,7 @@ To run the command interpreter:
 
 $ ./console.py
 Example
-Interactive mode:
+#Interactive mode:
 
 $ ./console.py
 (hbnb) help
@@ -50,6 +50,30 @@ Quit command to exit the program
 (hbnb) help show
 Show command to print string representation of an instance
 (hbnb)
+
+
+#Non-interactive mode
+
+$ echo "help" | ./console.py
+(hbnb)
+
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+(hbnb) 
+$
 (hbnb) help update
 Update instance based on cls name & id by adding or updating attr
 (hbnb) 
