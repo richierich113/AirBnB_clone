@@ -109,10 +109,10 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in storage.proj_classes():
                 print("** class doesn't exist **")
                 return
-            insts = [str(obj) for key, obj in storage.all().values()
+            insts = [str(obj) for key, obj in storage.all().items()
                      if isinstance(obj, storage.proj_classes()[class_name])]
         else:
-            insts = [str(obj) for obj in storage.all().values()]
+            insts = [str(obj) for key, obj in storage.all().items()]
 
         print(insts)
 
