@@ -57,34 +57,36 @@ class HBNBCommand(cmd.Cmd):
         return line
 
     def update_dict(self, classname, uid, s_dict):
-    """Helper method for updating an instance with a dictionary."""
-    if not classname:
-        print("** class name missing **")
-        return
-    if classname not in storage.proj_classes():
-        print("** class doesn't exist **")
-        return
-    if not uid:
-        print("** instance id missing **")
-        return
+          """Helper method for updating an instance
+          with a dictionary.
+          """
+        if not classname:
+            print("** class name missing **")
+            return
+        if classname not in storage.proj_classes():
+            print("** class doesn't exist **")
+            return
+        if not uid:
+            print("** instance id missing **")
+            return
 
-    key = f"{classname}.{uid}"
-    all_objects = storage.all()
-    if key not in all_objects:
-        print("** no instance found **")
-        return
+        key = f"{classname}.{uid}"
+        all_objects = storage.all()
+        if key not in all_objects:
+            print("** no instance found **")
+            return
 
-    try:
-        data = json.loads(s_dict)
-    except json.JSONDecodeError:
-        print("** invalid JSON format **")
-        return
+        try:
+            data = json.loads(s_dict)
+        except json.JSONDecodeError:
+            print("** invalid JSON format **")
+            return
 
-    obj = all_objects[key]
-    for key, value in data.items():
-        if hasattr(obj, key):
-            setattr(obj, key, value)
-    obj.save()
+        obj = all_objects[key]
+        for key, value in data.items():
+            if hasattr(obj, key):
+                setattr(obj, key, value)
+        obj.save()
 
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it
