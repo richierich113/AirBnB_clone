@@ -210,18 +210,16 @@ class HBNBCommand(cmd.Cmd):
         instance.save()
 
     def do_count(self, line):
-        """Counts the instances of a class.
-        """
-        words = line.split(' ')
-        if not words[0]:
+        """Counts the instances of a class."""
+        class_name = line.split(' ')[0]
+    
+        if not class_name:
             print("** class name missing **")
-        elif words[0] not in storage.proj_classes():
+        elif class_name not in storage.classes():
             print("** class doesn't exist **")
         else:
-            matches = [
-                k for k in storage.all() if k.startswith(
-                    words[0] + '.')]
-            print(len(matches))
+            count = sum(1 for key in storage.all() if key.startswith(f"{class_name}."))
+            print(count)
 
 
 if __name__ == '__main__':
