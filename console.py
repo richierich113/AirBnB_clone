@@ -31,6 +31,61 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing when line is empty and ENTER is pressed"""
         pass
 
+    def default(self, line):
+        print(f"Command is not recognized: {line}")
+
+    def _precmd(self, line):
+        """Intercepts commands to test for class.syntax()
+        """
+        match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
+        if not match:
+            return line
+
+        classname, method, args = match.groups()
+        if method == "update":
+            if args.startswith("{") and args.endswith("}"):
+                s_dict = args
+                self.update_dict(classname, uid, s_dict)
+                return ""
+            else:
+                args = args.split(", ")
+                uid = args[0]
+                attr_and_value = " ".join(args[1:])
+                command = f"{method} {classname} {uid} {attr_and_value}"
+                self.onecmd(command)
+                return command
+        return line
+
+def update_dict(self, classname, uid, s_dict):
+    """Helper method for updating an instance with a dictionary."""
+    if not classname:
+        print("** class name missing **")
+        return
+    if classname not in storage.classes():
+        print("** class doesn't exist **")
+        return
+    if not uid:
+        print("** instance id missing **")
+        return
+
+    key = f"{classname}.{uid}"
+    all_objects = storage.all()
+    if key not in all_objects:
+        print("** no instance found **")
+        return
+
+    try:
+        data = json.loads(s_dict)
+    except json.JSONDecodeError:
+        print("** invalid JSON format **")
+        return
+
+    obj = all_objects[key]
+    for key, value in data.items():
+        if hasattr(obj, key):
+            setattr(obj, key, value)
+    obj.save()
+
     def do_create(self, line):
         """Creates a new instance of BaseModel, saves it
         (to the JSON file) and prints the id
