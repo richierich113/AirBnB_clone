@@ -1,11 +1,12 @@
 In this project, we will be developing the console for our airbnb project. This console will be written in Python3 and will be used for communication between our webapp, static content, databases, and filesystem.
 
-🏃 Getting Started
+#🏃 Getting Started
 Ubuntu 14.04 LTS - Operating system reqd.
 
 GCC 4.8.4 - Compiler used
 
-⚠️ Prerequisites
+#⚠️ Prerequisites
+
 Must have git installed
 
 Must have repository cloned
