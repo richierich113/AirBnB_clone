@@ -34,5 +34,6 @@ class TestCity(unittest.TestCase):
             self.assertTrue(hasattr(self.city, attr_name))
             self.assertIsInstance(getattr(self.city, attr_name), attr_type)
 
+
 if __name__ == "__main__":
     unittest.main()
