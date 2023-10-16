@@ -56,12 +56,12 @@ class HBNBCommand(cmd.Cmd):
                 return command
         return line
 
-def update_dict(self, classname, uid, s_dict):
+    def update_dict(self, classname, uid, s_dict):
     """Helper method for updating an instance with a dictionary."""
     if not classname:
         print("** class name missing **")
         return
-    if classname not in storage.classes():
+    if classname not in storage.proj_classes():
         print("** class doesn't exist **")
         return
     if not uid:
