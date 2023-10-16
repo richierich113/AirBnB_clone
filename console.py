@@ -96,9 +96,9 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
-
-         del storage.all()[key]
-         storage.save()
+            
+        del storage.all()[key]
+        storage.save()
 
     def do_all(self, line):
         """Prints the string representation of instances."""
