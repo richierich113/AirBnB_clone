@@ -34,5 +34,6 @@ class TestUser(unittest.TestCase):
             self.assertTrue(hasattr(self.user, attr_name))
             self.assertIsInstance(getattr(self.user, attr_name), attr_type)
 
+
 if __name__ == "__main__":
     unittest.main()
