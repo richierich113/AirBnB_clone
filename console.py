@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if line is None or line == "":
             print("Class name is missing")
-	    else:
+	else:
             args = line.split()
             class_name = args[0]
             if class_name not in storage.proj_classes():
