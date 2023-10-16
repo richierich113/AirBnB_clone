@@ -21,8 +21,9 @@ class TestFileStorage(unittest.TestCase):
         """Reset the FileStorage data and remove the JSON file."""
         self.reset_storage()
 
-        Helper method to reset the FileStorage data.
-        def reset_storage(self):
+    def reset_storage(self):
+        """ Helper method to reset the FileStorage data.
+        """
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
