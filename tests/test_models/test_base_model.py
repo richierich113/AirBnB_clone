@@ -2,35 +2,35 @@
 """Unittest module for the BaseModel Class."""
 
 from models import storage
-from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
 from datetime import datetime
-import json
-import os
-import re
 import time
 import unittest
 import uuid
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+import json
+import os
+import re
 
 
 class TestBaseModel(unittest.TestCase):
 
-    """Test Cases for the BaseModel class."""
+    """Test Cases for the BaseModel."""
 
     def setUp(self):
-        """Sets up test methods."""
-        pass
-
-    def tearDown(self):
-        """Tears down test methods."""
-        self.resetStorage()
+        """Sets up test"""
         pass
 
     def resetStorage(self):
-        """Resets FileStorage data."""
+        """Resets the Storage data."""
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
+
+    def tearDown(self):
+        """clears test methods."""
+        self.resetStorage()
+        pass
 
     def test_3_instantiation(self):
         """Tests instantiation of BaseModel class."""
@@ -41,7 +41,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(issubclass(type(b), BaseModel))
 
     def test_3_init_no_args(self):
-        """Tests __init__ with no arguments."""
+        """__init__ with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
             BaseModel.__init__()
@@ -49,14 +49,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(e.exception), msg)
 
     def test_3_init_many_args(self):
-        """Tests __init__ with many arguments."""
+        """__init__ using many arguments."""
         self.resetStorage()
         args = [i for i in range(1000)]
         b = BaseModel(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
         b = BaseModel(*args)
 
     def test_3_attributes(self):
-        """Tests attributes value for instance of a BaseModel class."""
+        """attributes value for instance of a BaseModel class."""
 
         attributes = storage.attributes()["BaseModel"]
         o = BaseModel()
@@ -64,30 +64,20 @@ class TestBaseModel(unittest.TestCase):
             self.assertTrue(hasattr(o, k))
             self.assertEqual(type(getattr(o, k, None)), v)
 
-    def test_3_datetime_created(self):
-        """Tests if updated_at & created_at are current at creation."""
+    def test_3_id(self):
+        """unique user ids."""
+
+        nl = [BaseModel().id for i in range(1000)]
+        self.assertEqual(len(set(nl)), len(nl))
+
+     def test_3_datetime_created(self):
+        """if updated_at and created_at are current on creation."""
         date_now = datetime.now()
         b = BaseModel()
         diff = b.updated_at - b.created_at
         self.assertTrue(abs(diff.total_seconds()) < 0.01)
         diff = b.created_at - date_now
         self.assertTrue(abs(diff.total_seconds()) < 0.1)
-
-    def test_3_id(self):
-        """Tests for unique user ids."""
-
-        nl = [BaseModel().id for i in range(1000)]
-        self.assertEqual(len(set(nl)), len(nl))
-
-    def test_3_save(self):
-        """Tests the public instance method save()."""
-
-        b = BaseModel()
-        time.sleep(0.5)
-        date_now = datetime.now()
-        b.save()
-        diff = b.updated_at - date_now
-        self.assertTrue(abs(diff.total_seconds()) < 0.01)
 
     def test_3_str(self):
         """Tests for __str__ method."""
@@ -104,6 +94,16 @@ class TestBaseModel(unittest.TestCase):
         d2["created_at"] = repr(d2["created_at"])
         d2["updated_at"] = repr(d2["updated_at"])
         self.assertEqual(d, d2)
+
+    def test_3_save(self):
+        """public instance method save()."""
+
+        b = BaseModel()
+        time.sleep(0.5)
+        date_now = datetime.now()
+        b.save()
+        diff = b.updated_at - date_now
+        self.assertTrue(abs(diff.total_seconds()) < 0.01)
 
     def test_3_to_dict(self):
         """Tests the public instance method to_dict()."""
