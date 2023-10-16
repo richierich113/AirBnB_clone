@@ -34,5 +34,6 @@ class TestAmenity(unittest.TestCase):
             self.assertTrue(hasattr(self.amenity, attr_name))
             self.assertIsInstance(getattr(self.amenity, attr_name), attr_type)
 
+
 if __name__ == "__main__":
     unittest.main()
