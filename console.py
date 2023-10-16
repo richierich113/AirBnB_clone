@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
 
     def update_dict(self, classname, uid, s_dict):
         """Helper method for updating an instance
-        with a dictionary.
+        with a dictionary
         """
         if not classname:
             print("** class name missing **")
