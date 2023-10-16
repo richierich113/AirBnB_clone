@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
         if key not in storage.all():
             print("** no instance found **")
             return
-            
+
         del storage.all()[key]
         storage.save()
 
@@ -109,12 +109,12 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in storage.proj_classes():
                 print("** class doesn't exist **")
                 return
-            instances = [str(obj) for key, obj in storage.all().values()
-                         if isinstance(obj, storage.proj_classes()[class_name])]
+            insts = [str(obj) for key, obj in storage.all().values()
+                     if isinstance(obj, storage.proj_classes()[class_name])]
         else:
-            instances = [str(obj) for obj in storage.all().values()]
+            insts = [str(obj) for obj in storage.all().values()]
 
-        print(instances)
+        print(insts)
 
     def do_update(self, line):
         """Updates an instance by adding or
